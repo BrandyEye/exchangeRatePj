@@ -34,7 +34,7 @@ public class ExchangeRate {
 	private Integer sn;
 	
 	/**
-	 * 
+	 * 美金/台幣
 	 */
 	@NotNull
 	@Digits(integer=5,fraction=8)
@@ -42,7 +42,7 @@ public class ExchangeRate {
 	private BigDecimal USD_NTD;
 	
 	/**
-	 * 
+	 * 人民幣/台幣
 	 */
 	@NotNull
 	@Digits(integer=5,fraction=8)
@@ -50,7 +50,7 @@ public class ExchangeRate {
 	private BigDecimal RMB_NTD;
 	
 	/**
-	 * 
+	 * 美金/人民幣
 	 */
 	@NotNull
 	@Digits(integer=5,fraction=8)

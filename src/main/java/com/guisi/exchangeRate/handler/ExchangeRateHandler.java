@@ -9,6 +9,11 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 public class ExchangeRateHandler {
 
+	
+	/**
+	 * 連線至opendata取得匯率資料 
+	 * @return json匯率資料
+	 */
 	public static String dailyForeignExchangeRates_API() {
 		String rsJson ="";
 		HttpURLConnection con = null;

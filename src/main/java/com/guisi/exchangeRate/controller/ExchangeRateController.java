@@ -28,12 +28,22 @@ public class ExchangeRateController {
 		this.service = service;
 	}
 	
+	/**
+	 * 查匯率資料
+	 * @param modal
+	 * @return
+	 */
 	@RequestMapping(path="/takeDailyForeignExchangeRatesAPI")
 	public String takeDailyForeignExchangeRatesAPI(Model modal) {
 		service.takeDailyForeignExchangeRatesAPI();
 		return "redirect:" + "/index"; // 重新導向到指定的url
 	}
 
+	/**
+	 * 首頁
+	 * @param modal
+	 * @return
+	 */
 	@RequestMapping(path="/index")
 	public String index(Model modal) {
 		List<ExchangeRate> list = service.findAllExRate();
@@ -41,6 +51,11 @@ public class ExchangeRateController {
 		return "index";
 	}
 	
+	/**
+	 * 更新匯率檔初始
+	 * @param modal
+	 * @return
+	 */
 	@RequestMapping(path="/updateExRatePage")
 	public String updateExRatePage(Model modal,@RequestParam("sn") Integer sn) {
 		ExchangeRate entity = service.findById(sn);
@@ -48,12 +63,22 @@ public class ExchangeRateController {
 		return "add";
 	}
 	
+	/**
+	 * 新增匯率檔初始
+	 * @param modal
+	 * @return
+	 */
 	@RequestMapping(path="/addExRatePage")
 	public String addExRatePage(Model modal) {
 		modal.addAttribute("entity",service.addExRate());
 		return "add";
 	}
 	
+	/**
+	 * 更新匯率檔
+	 * @param modal
+	 * @return
+	 */
 	@RequestMapping(path="/updateExRate")
 	public String updateExRate(Model modal,@Valid @ModelAttribute("entity")ExchangeRate entity,BindingResult bindingResult,RedirectAttributes redirectAttributes) {
 		if(bindingResult.hasErrors()) {
@@ -64,12 +89,22 @@ public class ExchangeRateController {
 		return "redirect:" + "/index";
 	}
 	
+	/**
+	 * 刪匯率檔
+	 * @param modal
+	 * @return
+	 */
 	@RequestMapping(path="/deleteExRate")
 	public String deleteExRate(@RequestParam("sn") Integer sn) {
 		service.deleteExRate(sn);
 		return "redirect:" + "/index"; 
 	}
-	
+
+	/**
+	 * 查匯率檔
+	 * @param modal
+	 * @return
+	 */
 	@RequestMapping(path="/findAll")
 	public String findAll() {
 		service.findAllExRate();

@@ -10,16 +10,35 @@ import com.guisi.exchangeRate.entities.ExchangeRate;
 public interface ExchangeRateService {
 	
 	
+	/**
+	 * api查匯率資料
+	 */
 	public void takeDailyForeignExchangeRatesAPI();
 	
+	/**
+	 * @param entity
+	 */
 	public void updateExRate(ExchangeRate entity);
 	
+	/**
+	 * @return
+	 */
 	public ExchangeRate addExRate();
 	
+	/**
+	 * @param id
+	 */
 	public void deleteExRate(Integer id);
 	
+	/**
+	 * @return
+	 */
 	public List<ExchangeRate> findAllExRate();
 	
+	/**
+	 * @param id
+	 * @return
+	 */
 	public ExchangeRate findById(Integer id);
 
 }
