@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ExchangeRate</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<script>
+    
+</script>
+<body>
+	
+	<form th:action="@{/takeDailyForeignExchangeRatesAPI}" method="GET">
+	<input type="submit" id="takeData" th:value="匯率資料抓取" />
+	</form>
+	<span th:text="${error}"></span>
+	<table border="1" align="center">
+
+		<thead>
+			<tr>
+				<th>sn</th>
+				<th>美金/台幣</th>
+				<th>人民幣/台幣</th>
+				<th>美金/人民幣</th>
+				<th>日期</th>
+				<th><form th:action="@{/addExRatePage}" method="GET"><input type="submit" th:value="新增" /></form></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="ExchangeRate : ${exchangeRate}">
+				<td th:text="${ExchangeRate.sn}"></td>
+				<td th:text="${ExchangeRate.USD_NTD}"></td>
+				<td th:text="${ExchangeRate.RMB_NTD}"></td>
+				<td th:text="${ExchangeRate.USD_RMB}">${ExchangeRate.USD_NTD}</td>
+				<td th:text="${ExchangeRate.date}"></td>
+				<td><form th:action="@{/deleteExRate}" method="GET"><input type="hidden" name="sn" th:value="${ExchangeRate.sn}" /><input type="submit" th:value="刪除" /></form></td>
+				<td><form th:action="@{/updateExRatePage}" method="GET"><input type="hidden" name="sn" th:value="${ExchangeRate.sn}" /><input type="submit" th:value="更改" /></form></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>
+

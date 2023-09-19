@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ExchangeRate</title>
+</head>
+<body>
+
+<form th:action="@{/updateExRate}" method="post" th:object="${entity}">
+    <table border="1" align="right">
+		<label for="name">sn:</label>
+        <span th:text="*{sn}"/>
+		<input type="hidden" id="sn" name="sn" th:field="*{sn}" />
+		
+        <label for="name">美金/台幣:</label>
+        <input type="text" id="USD_NTD" name="USD_NTD" th:field="*{USD_NTD}" />
+        
+        <label for="age">人民幣/台幣:</label>
+        <input type="text" id="RMB_NTD" name="RMB_NTD" th:field="*{RMB_NTD}" />
+        
+        <label for="age">美金/人民幣:</label>
+        <input type="text" id="USD_RMB" name="USD_RMB" th:field="*{USD_RMB}" />
+        
+        <label for="name">日期:</label>
+        <span th:text="*{date}"/>
+        <input type="hidden" id="date" name="date" th:field="*{date}" />
+        <input type="submit" value="Submit" />
+    </tbody>
+    </form>
+</body>
+</html>
+
+<script>
+	
+	
+	
+</script>
