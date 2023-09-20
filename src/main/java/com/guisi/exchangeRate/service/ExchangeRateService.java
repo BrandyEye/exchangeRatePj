@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.guisi.exchangeRate.entities.ExchangeRate;
+import com.guisi.exchangeRate.vo.SearchBean;
 
 @Service
 public interface ExchangeRateService {
@@ -29,6 +30,11 @@ public interface ExchangeRateService {
 	 * @param id
 	 */
 	public void deleteExRate(Integer id);
+	
+	/**
+	 * @return
+	 */
+	public List<ExchangeRate> findAllExRate(SearchBean sb);
 	
 	/**
 	 * @return

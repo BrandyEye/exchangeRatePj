@@ -15,6 +15,13 @@
 	<input type="submit" id="takeData" th:value="匯率資料抓取" />
 	</form>
 	<span th:text="${error}"></span>
+	
+	<form th:action="@{/findAll}" method="GET" th:object="${sb}">
+	<input type="text"  name="dateCondition" placeholder="eg.20230919"/>
+	<input type="number"  name="pageNum" min="1" placeholder="分頁頁碼預設1"/>
+	<input type="number"  name="pageSize" min="1" placeholder="分頁大小預設20"/>
+	<input type="submit" value="查詢"/>
+	</form>
 	<table border="1" align="center">
 
 		<thead>

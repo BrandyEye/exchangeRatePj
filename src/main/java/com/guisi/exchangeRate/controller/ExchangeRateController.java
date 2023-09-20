@@ -7,10 +7,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guisi.exchangeRate.entities.ExchangeRate;
 import com.guisi.exchangeRate.service.ExchangeRateService;
+import com.guisi.exchangeRate.vo.SearchBean;
 
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,8 +108,9 @@ public class ExchangeRateController {
 	 * @return
 	 */
 	@RequestMapping(path="/findAll")
-	public String findAll() {
-		service.findAllExRate();
+	public String findAll(Model modal,@NotNull SearchBean sb) {
+		List<ExchangeRate> list = service.findAllExRate(sb);
+		modal.addAttribute("exchangeRate",list);
 		return "index";
 	}
 }
