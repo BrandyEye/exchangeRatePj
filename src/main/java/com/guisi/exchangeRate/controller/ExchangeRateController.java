@@ -1,15 +1,20 @@
 package com.guisi.exchangeRate.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guisi.exchangeRate.entities.ExchangeRate;
 import com.guisi.exchangeRate.service.ExchangeRateService;
 import com.guisi.exchangeRate.vo.SearchBean;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +25,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
 @Controller
-public class ExchangeRateController {
+public class ExchangeRateController extends BasicController {
 
 	private ExchangeRateService service;
 	
@@ -100,6 +105,14 @@ public class ExchangeRateController {
 	public String deleteExRate(@RequestParam("sn") Integer sn) {
 		service.deleteExRate(sn);
 		return "redirect:" + "/index"; 
+	}
+	
+	@RequestMapping(path="/deleteExRateJ")
+	@ResponseBody
+	public Map<String,String> deleteExRateJson(@RequestBody Integer sn) {
+		Map<String, String> response = new HashMap<>();
+		response.put("sn", new String("dd"));
+		return response;
 	}
 
 	/**

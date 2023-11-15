@@ -2,13 +2,28 @@ package com.guisi.exchangeRate.handler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.guisi.exchangeRate.entities.ExchangeRate;
+
 
 public class ExchangeRateHandler {
 
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	/**
 	 * 連線至opendata取得匯率資料 
@@ -62,5 +77,39 @@ public class ExchangeRateHandler {
 		}
 		return rsJson;
 
+	}
+	
+	
+	public static String dailyForeignExchangeRates_API_sp() {
+		String apiUrl = "https://openapi.taifex.com.tw/v1/DailyForeignExchangeRates";
+		String searchUrl = new StringBuffer(apiUrl).toString();
+		RestTemplate rses  = new RestTemplate();
+		ResponseEntity<String> resp = rses.getForEntity(searchUrl, String.class);
+//		List<CmsActBatchRemitBo> ansList = Arrays.asList(resp);
+		String str  = resp.getBody();
+		List<ExchangeRate> exChangeList = new ArrayList<>();
+//		JsonObject jsonObject = JsonParser.parseString(str).getAsJsonObject();
+		JsonArray jsonArrayObject = JsonParser.parseString(str).getAsJsonArray();
+		jsonArrayObject.asList().forEach((obj)->{
+			JsonObject jb = obj.getAsJsonObject();
+			ExchangeRate rate = new ExchangeRate();
+            BigDecimal USD_NTD = jb.get("USD/NTD").getAsBigDecimal();
+            BigDecimal USD_RMB = jb.get("USD/RMB").getAsBigDecimal();
+            BigDecimal RMB_NTD = jb.get("RMB/NTD").getAsBigDecimal();
+            String date = jb.get("Date").getAsString();
+            rate.setDate(date);
+            rate.setRMB_NTD(RMB_NTD);
+            rate.setUSD_NTD(USD_NTD);
+            rate.setUSD_RMB(USD_RMB);
+            exChangeList.add(rate);
+
+		});
+        System.out.println(exChangeList);
+		return apiUrl;
+	
+	}
+	
+	public static void main(String[] args) {
+		dailyForeignExchangeRates_API_sp();
 	}
 }
